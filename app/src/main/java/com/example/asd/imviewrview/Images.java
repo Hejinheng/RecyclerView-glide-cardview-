@@ -1,11 +1,28 @@
 package com.example.asd.imviewrview;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by  sd on 2017/4/19.
  */
 
 public class Images {
-    public final static String[] imageThumbUrls = new String[] {
+    static List<String> list;
+    public static List<String> getList(){
+           if (list==null){
+               list=new ArrayList<String>();
+               for (int i=0;imageThumbUrls.length>i;i++){
+                   list.add(imageThumbUrls[i]);
+               }
+           }
+
+            return list;
+
+    }
+
+
+    private final static String[] imageThumbUrls = new String[] {
             "http://img.my.csdn.net/uploads/201407/26/1406383299_1976.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383291_6518.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383291_8239.jpg",

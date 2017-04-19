@@ -29,17 +29,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.litm,parent,false);
         RequestManager requestManager= Glide.with(parent.getContext());
+        final ViewHolder holder=new ViewHolder(view,requestManager);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position=holder.getAdapterPosition();
+                if (position!=-1) {
+                    Images.getList().remove(position);
+                    notifyItemRemoved(position);
+                }
 
-        return new ViewHolder(view,requestManager);
+            }
+        });
+
+
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
-        holder.requestManager.load(Images.imageThumbUrls[position]).into(holder.imageView);
+        holder.requestManager.load(Images.getList().get(position)).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return Images.imageThumbUrls.length;
+        return Images.getList().size();
     }
 }
